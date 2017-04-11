@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-vows/vows/lib/assert/macros.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-vows">npmtest-vows (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-vows/vows/lib/assert/macros.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">30.67% <small>(50 / 163)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">1.9% <small>(3 / 158)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">9.52% <small>(4 / 42)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">31.06% <small>(50 / 161)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-vows/vows/lib/assert/</a> &#187; macros.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var assert = require('assert'),
+    utils = require('./utils');
+&nbsp;
+var messages = {
+    'equal'       : "expected {expected},\n\tgot\t {actual} ({operator})",
+    'notEqual'    : "didn't expect {actual} ({operator})"
+};
+messages['strictEqual']    = messages['deepEqual']    = messages['equal'];
+messages['notStrictEqual'] = messages['notDeepEqual'] = messages['notEqual'];
+&nbsp;
+for (var key in messages) {
+    assert[key] = (function (key, callback) {
+        return <span class="fstat-no" title="function not covered" >function (actual, expected, message) {</span>
+<span class="cstat-no" title="statement not covered" >            callback(actual, expected, message || messages[key]);</span>
+        };
+    })(key, assert[key]);
+}
+&nbsp;
+assert.epsilon = <span class="fstat-no" title="function not covered" >function (eps, actual, expected, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.epsilon);</span>
+<span class="cstat-no" title="statement not covered" >    if (isNaN(eps)) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, expected, message || "cannot compare {actual} with {expected} \u00B1 NaN");</span>
+    } else <span class="cstat-no" title="statement not covered" >if (isNaN(actual) || Math.abs(actual - expected) &gt; eps) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, expected, message || "expected {expected} \u00B1"+ eps +", but was {actual}");</span>
+    }
+};
+&nbsp;
+assert.ok = (function (callback) {
+    assertMissingArguments(arguments, assert.ok);
+    return function (actual, message) {
+        callback(actual, message ||  "expected expression to evaluate to {expected}, but was {actual}");
+    };
+})(assert.ok);
+&nbsp;
+assert.match = <span class="fstat-no" title="function not covered" >function (actual, expected, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.match);</span>
+<span class="cstat-no" title="statement not covered" >    if (! expected.test(actual)) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, expected, message || "expected {actual} to match {expected}", "match", assert.match);</span>
+    }
+};
+assert.matches = assert.match;
+&nbsp;
+assert.isTrue = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isTrue);</span>
+<span class="cstat-no" title="statement not covered" >    if (actual !== true) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, true, message || "expected {expected}, got {actual}", "===", assert.isTrue);</span>
+    }
+};
+assert.isFalse = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isFalse);</span>
+<span class="cstat-no" title="statement not covered" >    if (actual !== false) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, false, message || "expected {expected}, got {actual}", "===", assert.isFalse);</span>
+    }
+};
+assert.isZero = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isZero);</span>
+<span class="cstat-no" title="statement not covered" >    if (actual !== 0) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, 0, message || "expected {expected}, got {actual}", "===", assert.isZero);</span>
+    }
+};
+assert.isNotZero = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isNotZero);</span>
+<span class="cstat-no" title="statement not covered" >    if (actual === 0) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, 0, message || "expected non-zero value, got {actual}", "===", assert.isNotZero);</span>
+    }
+};
+&nbsp;
+assert.greater = <span class="fstat-no" title="function not covered" >function (actual, expected, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.greater);</span>
+<span class="cstat-no" title="statement not covered" >    if (actual &lt;= expected) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, expected, message || "expected {actual} to be greater than {expected}", "&gt;", assert.greater);</span>
+    }
+};
+assert.lesser = <span class="fstat-no" title="function not covered" >function (actual, expected, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.lesser);</span>
+<span class="cstat-no" title="statement not covered" >    if (actual &gt;= expected) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, expected, message || "expected {actual} to be lesser than {expected}", "&lt;", assert.lesser);</span>
+    }
+};
+&nbsp;
+assert.inDelta = <span class="fstat-no" title="function not covered" >function (actual, expected, delta, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.inDelta);</span>
+<span class="cstat-no" title="statement not covered" >    var lower = expected - delta;</span>
+<span class="cstat-no" title="statement not covered" >    var upper = expected + delta;</span>
+<span class="cstat-no" title="statement not covered" >    if (actual != +actual || actual &lt; lower || actual &gt; upper) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, expected, message || "expected {actual} to be in within *" + delta.toString() + "* of {expected}", null, assert.inDelta);</span>
+    }
+};
+&nbsp;
+//
+// Inclusion
+//
+assert.include = <span class="fstat-no" title="function not covered" >function (actual, expected, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.include);</span>
+<span class="cstat-no" title="statement not covered" >    if ((<span class="fstat-no" title="function not covered" >function (obj) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (isArray(obj) || isString(obj)) {</span>
+<span class="cstat-no" title="statement not covered" >            return obj.indexOf(expected) === -1;</span>
+        } else <span class="cstat-no" title="statement not covered" >if (isObject(actual)) {</span>
+<span class="cstat-no" title="statement not covered" >            return ! obj.hasOwnProperty(expected);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return true;</span>
+    })(actual)) {
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, expected, message || "expected {actual} to include {expected}", "include", assert.include);</span>
+    }
+};
+assert.includes = assert.include;
+&nbsp;
+assert.notInclude = <span class="fstat-no" title="function not covered" >function (actual, expected, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.notInclude);</span>
+<span class="cstat-no" title="statement not covered" >    if ((<span class="fstat-no" title="function not covered" >function (obj) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (isArray(obj) || isString(obj)) {</span>
+<span class="cstat-no" title="statement not covered" >            return obj.indexOf(expected) !== -1;</span>
+        } else <span class="cstat-no" title="statement not covered" >if (isObject(actual)) {</span>
+<span class="cstat-no" title="statement not covered" >            return obj.hasOwnProperty(expected);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return true;</span>
+    })(actual)) {
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, expected, message || "expected {actual} not to include {expected}", "include", assert.notInclude);</span>
+    }
+};
+assert.notIncludes = assert.notInclude;
+&nbsp;
+assert.deepInclude = <span class="fstat-no" title="function not covered" >function (actual, expected, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.deepInclude);</span>
+<span class="cstat-no" title="statement not covered" >    if (!isArray(actual)) {</span>
+<span class="cstat-no" title="statement not covered" >        return assert.include(actual, expected, message);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (!actual.some(<span class="fstat-no" title="function not covered" >function (item) {</span> <span class="cstat-no" title="statement not covered" >return utils.deepEqual(item, expected) }</span>)) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, expected, message || "expected {actual} to include {expected}", "include", assert.deepInclude);</span>
+    }
+};
+assert.deepIncludes = assert.deepInclude;
+&nbsp;
+//
+// Length
+//
+assert.isEmpty = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isEmpty);</span>
+<span class="cstat-no" title="statement not covered" >    if ((isObject(actual) &amp;&amp; Object.keys(actual).length &gt; 0) || actual.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, 0, message || "expected {actual} to be empty", "length", assert.isEmpty);</span>
+    }
+};
+assert.isNotEmpty = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isNotEmpty);</span>
+<span class="cstat-no" title="statement not covered" >    if ((isObject(actual) &amp;&amp; Object.keys(actual).length === 0) || actual.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, 0, message || "expected {actual} to be not empty", "length", assert.isNotEmpty);</span>
+    }
+};
+&nbsp;
+assert.lengthOf = <span class="fstat-no" title="function not covered" >function (actual, expected, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.lengthOf);</span>
+<span class="cstat-no" title="statement not covered" >    var len = isObject(actual) ? Object.keys(actual).length : actual.length;</span>
+<span class="cstat-no" title="statement not covered" >    if (len !== expected) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, expected, message || "expected {actual} to have {expected} element(s)", "length", assert.length);</span>
+    }
+};
+&nbsp;
+//
+// Type
+//
+assert.isArray = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isArray);</span>
+<span class="cstat-no" title="statement not covered" >    assertTypeOf(actual, 'array', message || "expected {actual} to be an Array", assert.isArray);</span>
+};
+assert.isObject = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isObject);</span>
+<span class="cstat-no" title="statement not covered" >    assertTypeOf(actual, 'object', message || "expected {actual} to be an Object", assert.isObject);</span>
+};
+assert.isNumber = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isNumber);</span>
+<span class="cstat-no" title="statement not covered" >    if (isNaN(actual)) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, 'number', message || "expected {actual} to be of type {expected}", "isNaN", assert.isNumber);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        assertTypeOf(actual, 'number', message || "expected {actual} to be a Number", assert.isNumber);</span>
+    }
+};
+assert.isBoolean = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isBoolean);</span>
+<span class="cstat-no" title="statement not covered" >    if (actual !== true &amp;&amp; actual !== false) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, 'boolean', message || "expected {actual} to be a Boolean", "===", assert.isBoolean);</span>
+    }
+};
+assert.isNaN = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isNaN);</span>
+<span class="cstat-no" title="statement not covered" >    if (actual === actual) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, 'NaN', message || "expected {actual} to be NaN", "===", assert.isNaN);</span>
+    }
+};
+assert.isNull = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isNull);</span>
+<span class="cstat-no" title="statement not covered" >    if (actual !== null) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, null, message || "expected {expected}, got {actual}", "===", assert.isNull);</span>
+    }
+};
+assert.isNotNull = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isNotNull);</span>
+<span class="cstat-no" title="statement not covered" >    if (actual === null) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, null, message || "expected non-null value, got {actual}", "===", assert.isNotNull);</span>
+    }
+};
+assert.isUndefined = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isUndefined);</span>
+<span class="cstat-no" title="statement not covered" >    if (actual !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, undefined, message || "expected {actual} to be {expected}", "===", assert.isUndefined);</span>
+    }
+};
+assert.isDefined = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isDefined);</span>
+<span class="cstat-no" title="statement not covered" >    if(actual === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, 0, message || "expected {actual} to be defined", "===", assert.isDefined);</span>
+    }
+};
+assert.isString = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isString);</span>
+<span class="cstat-no" title="statement not covered" >    assertTypeOf(actual, 'string', message || "expected {actual} to be a String", assert.isString);</span>
+};
+assert.isFunction = <span class="fstat-no" title="function not covered" >function (actual, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.isFunction);</span>
+<span class="cstat-no" title="statement not covered" >    assertTypeOf(actual, 'function', message || "expected {actual} to be a Function", assert.isFunction);</span>
+};
+assert.typeOf = <span class="fstat-no" title="function not covered" >function (actual, expected, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.typeOf);</span>
+<span class="cstat-no" title="statement not covered" >    assertTypeOf(actual, expected, message, assert.typeOf);</span>
+};
+assert.instanceOf = <span class="fstat-no" title="function not covered" >function (actual, expected, message) {</span>
+<span class="cstat-no" title="statement not covered" >    assertMissingArguments(arguments, assert.instanceof);</span>
+<span class="cstat-no" title="statement not covered" >    if (! (actual instanceof expected)) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, expected, message || "expected {actual} to be an instance of {expected}", "instanceof", assert.instanceOf);</span>
+    }
+};
+&nbsp;
+//
+// Utility functions
+//
+&nbsp;
+function assertMissingArguments(args, caller) {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (args.length === 0) {
+<span class="cstat-no" title="statement not covered" >        assert.fail("", "", "expected number of arguments to be greater than zero", "", caller);</span>
+    }
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function assertTypeOf(actual, expected, message, caller) {</span>
+<span class="cstat-no" title="statement not covered" >    if (typeOf(actual) !== expected) {</span>
+<span class="cstat-no" title="statement not covered" >        assert.fail(actual, expected, message || "expected {actual} to be of type {expected}", "typeOf", caller);</span>
+    }
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function isArray (obj) {</span>
+<span class="cstat-no" title="statement not covered" >    return Array.isArray(obj);</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function isString (obj) {</span>
+<span class="cstat-no" title="statement not covered" >    return typeof(obj) === 'string' || obj instanceof String;</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function isObject (obj) {</span>
+<span class="cstat-no" title="statement not covered" >    return typeof(obj) === 'object' &amp;&amp; obj &amp;&amp; !isArray(obj);</span>
+}
+&nbsp;
+// A better `typeof`
+<span class="fstat-no" title="function not covered" >function typeOf(value) {</span>
+<span class="cstat-no" title="statement not covered" >    var s = typeof(value),</span>
+        types = [Object, Array, String, RegExp, Number, Function, Boolean, Date];
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (s === 'object' || s === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >        if (value) {</span>
+<span class="cstat-no" title="statement not covered" >            types.forEach(<span class="fstat-no" title="function not covered" >function (t) {</span></span>
+<span class="cstat-no" title="statement not covered" >                if (value instanceof t) { <span class="cstat-no" title="statement not covered" >s = t.name.toLowerCase() }</span></span>
+            });
+        } else { <span class="cstat-no" title="statement not covered" >s = 'null' }</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return s;</span>
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 23:01:00 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
